@@ -12,7 +12,7 @@ class Country {
         this.Science = new Science();
         // константа на покупку зерна
         this.BuyGrainConstant = this.Science.MoneySystem * 2;
-    }
+    } 
 
 // ---------- Агрономика
     // вычисление максимально возможного количества засеянного зерна
@@ -65,14 +65,6 @@ class Country {
         return this.Population - this.Scientists - this.Soldiers;
     }
 
-  /*  getMaxScientists() {
-        return Math.round(getFreePopulation() * 0.15);
-    }
-
-    getMaxSoldiers() {
-        return Math.round(getFreePopulation() * 0.30);
-    }
-*/
     getScientistCosts() {
         return Math.round(this.Scientists * 10);
     }
