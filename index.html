@@ -66,24 +66,62 @@
                 </div>
               </div>
               <div class="panel-footer">
-                <button class="btn btn-block btn-sm btn-default" type="button" id="allGrainActionsBtn">Засеять и продать</button>
+                <button class="btn btn-block btn-sm btn-info" type="button" id="allGrainActionsBtn">Засеять и продать</button>
               </div>
             </div>
 
-            <div class="panel panel-info">
+            <div class="panel panel-success">
               <div class="panel-heading">
                 Наука
               </div>
               <div class="panel-body">
-
+                <div class="form-group">
+                  <label class="control-label">Найм</label>
+                  <div style="width:100%">
+                    <input id="scientistHireInput" data-slider-id='scientistHireSlider' type="text" style="width:75%" />
+                    <div class="btn-group" style="margin-left:10px">
+                      <button id="setMaxScientistHireBtn" type="button" class="btn btn-xs btn-default">MAX</button>
+                      <button id="applyHireScientistBtn" type="button" class="btn btn-xs btn-default">DONE</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Увольнение</label>
+                  <div style="width:100%">
+                    <input id="scientistDismissInput" data-slider-id='scientistDismissSlider' type="text" style="width:75%" />
+                    <div class="btn-group" style="margin-left:10px">
+                      <button id="setMaxScientistDismissBtn" type="button" class="btn btn-xs btn-default">MAX</button>
+                      <button id="applyDismissScientistBtn" type="button" class="btn btn-xs btn-default">DONE</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="panel panel-info">
+            <div class="panel panel-warning">
               <div class="panel-heading">
                 Армия
               </div>
               <div class="panel-body">
-
+                <div class="form-group">
+                  <label class="control-label">Найм</label>
+                  <div style="width:100%">
+                    <input id="soldierHireInput" data-slider-id='soldierHireSlider' type="text" style="width:75%" />
+                    <div class="btn-group" style="margin-left:10px">
+                      <button id="setMaxSoldierHireBtn" type="button" class="btn btn-xs btn-default">MAX</button>
+                      <button id="applyHireSoldierBtn" type="button" class="btn btn-xs btn-default">DONE</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Увольнение</label>
+                  <div style="width:100%">
+                    <input id="soldierDismissInput" data-slider-id='soldierDismissSlider' type="text" style="width:75%" />
+                    <div class="btn-group" style="margin-left:10px">
+                      <button id="setMaxSoldierDismissBtn" type="button" class="btn btn-xs btn-default">MAX</button>
+                      <button id="applyDismissSoldierBtn" type="button" class="btn btn-xs btn-default">DONE</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -112,7 +150,7 @@
                   <span id="infoScientists" class="label label-info gjs-info"></span>
                 </div>
                 <div class="form-group">
-                  <span id="infoArmy" class="label label-info gjs-info"></span>
+                  <span id="infoSoldiers" class="label label-info gjs-info"></span>
                 </div>
               </div>
             </div>
@@ -157,7 +195,7 @@
                   <span id="infoScienceCosts" class="label label-info gjs-info"></span>
                 </div>
                 <div class="form-group">
-                  <span id="infoArmyCosts" class="label label-info gjs-info"></span>
+                  <span id="infoSoldiersCosts" class="label label-info gjs-info"></span>
                 </div>
               </div>
             </div>
@@ -178,40 +216,105 @@
   <link href="css/style.css" rel="stylesheet">
   
   <script src="js/logic/science.js" type="text/javascript"></script>
+  <script src="js/logic/scientists.js" type="text/javascript"></script>
+  <script src="js/logic/soldiers.js" type="text/javascript"></script>
   <script src="js/logic/country.js" type="text/javascript"></script>
+
   <script src="js/interfaces/agronomic.js" type="text/javascript"></script>
+  <script src="js/interfaces/scientists.js" type="text/javascript"></script>
 
   <script type="text/javascript">
     var _User = new Country();
 
+// инициализация слайдеров армии
+function populateSoldierSlider() {
+    $('#soldierHireInput').slider({
+        min: 0,
+        max: _User.getMaxSoldiersAvailable(),
+        value: 0,
+        formatter: function(value) {
+            return `Количество: ${value} Стоимость: ${_User.calculateSoldierCost(value)}`;
+        }
+    });
+    $('#soldierHireInput').slider('refresh');
+    $('#soldierDismissInput').slider({
+        min: 0,
+        max: _User.Soldiers.Amount,
+        value: 0
+    });
+    $('#soldierDismissInput').slider('refresh');
+}
+
+// найм и увольнение
+function populateSoldiersHire() {
+    const hireSlider = $('#soldierHireInput').slider();
+
+    $('#setMaxSoldierHireBtn').on('click', function () {
+        hireSlider.slider('setValue', _User.getMaxSoldiersAvailable());
+    });
+
+    $('#applyHireSoldierBtn').on('click', function () {
+        const value = hireSlider.slider('getValue');
+        // нанимаем ученых
+        _User.hireSoldier(value);
+        populateSoldierSlider();
+        populateHeader();
+    });
+}
+
+function populateSoldiersDismiss() {
+    const dismissSlider = $('#soldierDismissInput').slider();
+
+    $('#setMaxSoldierDismissBtn').on('click', function () {
+        dismissSlider.slider('setValue', _User.Soldiers.Amount);
+    });
+
+    $('#applyDismissSoldierBtn').on('click', function () {
+        const value = dismissSlider.slider('getValue');
+        // увольняем ученых
+        _User.dismissSoldiers(value);
+        populateSoldierSlider();
+        populateHeader();
+    });
+}
+
+    function init() {
+      populateHeader();
+      populateAgronomicSlider();
+      populateGrainActions();
+      populateGrainSellActions();
+      populateGrainBuyActions();
+
+      populateScientistSlider();
+      populateScientistsHire();
+      populateScientistsDismiss();
+
+      populateSoldierSlider();
+      populateSoldiersHire();
+      populateSoldiersDismiss();
+    }
+
     function populateHeader() {
       $('#infoMoney').text(`Деньги: ${_User.Money}`);
       $('#infoPopulation').text(`Население: ${_User.Population}`);
-      $('#infoCurrentPopulation').text(`Рабочие: ${_User.getFreePopulation()}`);
-      $('#infoScientists').text(`Ученые: ${_User.Scientists}`);
-      $('#infoArmy').text(`Солдаты: ${_User.Soldiers}`);
+      $('#infoCurrentPopulation').text(`Рабочие: ${_User.FreePopulation}`);
+      $('#infoScientists').text(`Ученые: ${_User.Scientists.Amount}`);
+      $('#infoSoldiers').text(`Солдаты: ${_User.Soldiers.Amount}`);
       $('#infoMaxPopulation').text(`Макс. населения: ${_User.MaxPopulation}`);
       $('#infoMoney').text(`Деньги: ${_User.Money}`);
       $('#infoGrain').text(`Зерно: ${_User.Grain}`);
       $('#infoTerritory').text(`Территория: ${_User.Area}`);
       $('#infoGrainGrowth').text(`Зерно: ${_User.getSownGrain()}`);
       $('#infoPopulationGrowth').text(`Население: ${_User.getPopulationGrowth()}`);
-      $('#infoScienceCosts').text(`Наука: ${_User.getScientistCosts()}`);
-      $('#infoArmyCosts').text(`Армия: ${_User.getSoldierCosts()}`);
+      $('#infoScienceCosts').text(`Наука: ${_User.getHiredScientistCosts()}`);
+      $('#infoSoldiersCosts').text(`Армия: ${_User.getHiredSoldierCosts()}`);
     }
 
 
 
     $(document).ready(function () {
       console.log(_User);
-
-
-
-      populateHeader();
-      populateAgronomicSlider();
-      populateGrainActions();
-      populateGrainSellActions();
-      populateGrainBuyActions();
+      init();
     });
 
 
