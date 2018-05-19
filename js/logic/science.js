@@ -39,21 +39,57 @@ class Science {
         this.ScienceLevelOverallProgress = 0;
     }
 
-    // рассчет текущего прогресса в зависимости от количества ученых и сложности исследования
-    getCurrentScienceProgress(science) {
+    // получение количества учёных занятых над проектом
+    getScientists(science) {
         switch (science) {
             case _ScienceDict.PopulationDensity:
-                return this.PopulationDensityScientists * (this.ScienceLevel - this.PopulationDensityDifficulty);
+                return this.PopulationDensityScientists;
             case _ScienceDict.PopulationGrowth:
-                return this.PopulationGrowthScientists * (this.ScienceLevel - this.PopulationGrowthDifficulty);
+                return this.PopulationGrowthScientists;
             case _ScienceDict.Agriculture:
-                return this.AgricultureScientists * (this.ScienceLevel - this.AgricultureDifficulty);
+                return this.AgricultureScientists;
             case _ScienceDict.MoneySystem:
-                return this.MoneySystemScientists * (this.ScienceLevel - this.MoneySystemDifficulty);
+                return this.MoneySystemScientists;
             case _ScienceDict.ArmyPower:
-                return this.ArmyPowerScientists * (this.ScienceLevel - this.ArmyPowerDifficulty);
+                return this.ArmyPowerScientists;
             case _ScienceDict.ScienceLevel:
-                return this.ScienceLevelScientists * (this.ScienceLevel - this.ScienceLevelDifficulty);
+                return this.ScienceLevelScientists;
+        }
+    }
+    // получение уровня развития
+    getScienceLevel(science) {
+        switch (science) {
+            case _ScienceDict.PopulationDensity:
+                return this.PopulationDensity;
+            case _ScienceDict.PopulationGrowth:
+                return this.PopulationGrowth;
+            case _ScienceDict.Agriculture:
+                return this.Agriculture;
+            case _ScienceDict.MoneySystem:
+                return this.MoneySystem;
+            case _ScienceDict.ArmyPower:
+                return this.ArmyPower;
+            case _ScienceDict.ScienceLevel:
+                return this.ScienceLevel;
+        }
+    }
+
+    // рассчет текущего прогресса в зависимости от количества ученых и сложности исследования
+    getCurrentScienceProgress(science) {
+        const scientistsAmount = this.getScientists(science);
+        switch (science) {
+            case _ScienceDict.PopulationDensity:
+                return scientistsAmount * (this.ScienceLevel - this.PopulationDensityDifficulty);
+            case _ScienceDict.PopulationGrowth:
+                return scientistsAmount * (this.ScienceLevel - this.PopulationGrowthDifficulty);
+            case _ScienceDict.Agriculture:
+                return scientistsAmount * (this.ScienceLevel - this.AgricultureDifficulty);
+            case _ScienceDict.MoneySystem:
+                return scientistsAmount * (this.ScienceLevel - this.MoneySystemDifficulty);
+            case _ScienceDict.ArmyPower:
+                return scientistsAmount * (this.ScienceLevel - this.ArmyPowerDifficulty);
+            case _ScienceDict.ScienceLevel:
+                return scientistsAmount * (this.ScienceLevel - this.ScienceLevelDifficulty);
         }
     }
 
@@ -80,7 +116,8 @@ class Science {
                 overallProgress = this.ScienceLevelOverallProgress;
                 break;
         }
-        return overallProgress + getCurrentScienceProgress(science);
+        const result = overallProgress + this.getCurrentScienceProgress(science);
+        return result > 100 ? 100 : result;
     }
 
     // рассчет оставшегося количества лет для исследования (текущий прогресс + имеющийся)
@@ -116,7 +153,7 @@ class Science {
         const difficulty = getRandomFloat(0.03, 0.05);
         switch (science) {
             case _ScienceDict.PopulationDensity:
-                this.PopulationDensityOverallProgress += getCurrentScienceProgress(science);
+                this.PopulationDensityOverallProgress += this.getCurrentScienceProgress(science);
                 // если исследовали, увеличим уровень
                 if (this.PopulationDensityOverallProgress >= 100) {
                     const levelUp = getRandomFloat(0.10, 0.19);
@@ -126,7 +163,7 @@ class Science {
                 }
                 break;
             case _ScienceDict.PopulationGrowth:
-                this.PopulationGrowthOverallProgress += getCurrentScienceProgress(science);
+                this.PopulationGrowthOverallProgress += this.getCurrentScienceProgress(science);
                 if (this.PopulationGrowthOverallProgress >= 100) {
                     const levelUp = getRandomFloat(1.0, 1.20);
                     this.PopulationGrowth += levelUp;
@@ -135,7 +172,7 @@ class Science {
                 }
                 break;
             case _ScienceDict.Agriculture:
-                this.AgricultureOverallProgress += getCurrentScienceProgress(science);
+                this.AgricultureOverallProgress += this.getCurrentScienceProgress(science);
                 if (this.AgricultureOverallProgress >= 100) {
                     const levelUp = getRandomFloat(1.0, 1.20);
                     this.Agriculture += levelUp;
@@ -144,7 +181,7 @@ class Science {
                 }
                 break;
             case _ScienceDict.MoneySystem:
-                this.MoneySystemOverallProgress += getCurrentScienceProgress(science);
+                this.MoneySystemOverallProgress += this.getCurrentScienceProgress(science);
                 if (this.MoneySystemOverallProgress >= 100) {
                     const levelUp = getRandomFloat(2.0, 2.20);
                     this.MoneySystem += levelUp;
@@ -153,7 +190,7 @@ class Science {
                 }
                 break;
             case _ScienceDict.ArmyPower:
-                this.ArmyPowerOverallProgress += getCurrentScienceProgress(science);
+                this.ArmyPowerOverallProgress += this.getCurrentScienceProgress(science);
                 if (this.ArmyPowerOverallProgress >= 100) {
                     const levelUp = getRandomFloat(0.20, 0.29);
                     this.ArmyPower += levelUp;
@@ -162,7 +199,7 @@ class Science {
                 }
                 break;
             case _ScienceDict.ScienceLevel:
-                this.ScienceLevelOverallProgress += getCurrentScienceProgress(science);
+                this.ScienceLevelOverallProgress += this.getCurrentScienceProgress(science);
                 if (this.ScienceLevelOverallProgress >= 100) {
                     const levelUp = getRandomFloat(0.20, 0.29);
                     this.ScienceLevel += levelUp;
@@ -181,5 +218,33 @@ class Science {
         this.setProgress(_ScienceDict.MoneySystem);
         this.setProgress(_ScienceDict.ArmyPower);
         this.setProgress(_ScienceDict.ScienceLevel);
+    }
+
+    // вычисление количества учёных для исследования за один год
+    getScientistsForOneYear(science, scientistsAvailable) {
+        let scientistsNeed = 0;
+        const remainingProgress = 100 - getScienceProgress(science);
+        //вычисляем оставшийся прогресс и делим на учёный уровень, округляя
+        switch (science) {
+            case _ScienceDict.PopulationDensity:
+                scientistsNeed = Math.round(remainingProgress / (this.ScienceLevel - this.PopulationDensityDifficulty));
+                break;
+            case _ScienceDict.PopulationGrowth:
+                scientistsNeed = Math.round(remainingProgress / (this.ScienceLevel - this.PopulationGrowthDifficulty));
+                break;
+            case _ScienceDict.Agriculture:
+                scientistsNeed = Math.round(remainingProgress / (this.ScienceLevel - this.AgricultureDifficulty));
+                break;
+            case _ScienceDict.MoneySystem:
+                scientistsNeed = Math.round(remainingProgress / (this.ScienceLevel - this.MoneySystemDifficulty));
+                break;
+            case _ScienceDict.ArmyPower:
+                scientistsNeed = Math.round(remainingProgress / (this.ScienceLevel - this.MoneySystemDifficulty));
+                break;
+            case _ScienceDict.ScienceLevel:
+                scientistsNeed = Math.round(remainingProgress / (this.ScienceLevel - this.ScienceLevelDifficulty));
+                break;
+        }
+        return scientistsNeed > scientistsAvailable ? 0 : scientistsNeed;
     }
 }

@@ -9,13 +9,9 @@
 
       // настройка заголовков
       function populateScienceLabels() {
-        $('label[name=scienceLabel]').each(function(i,item){ 
+        $('span[name=scienceLabel]').each(function(i,item){ 
           const science = $(item).attr('data-id');
-          switch (science) {
-              case 'populationDensity':
-                  $(item).text(`Плотность населения: ${_User.Science.PopulationDensity}`);
-              break;
-          }
+          $(item).text(_User.Science.getScienceLevel(science));
         });
     }
 
@@ -24,11 +20,7 @@
         // выставляем количество занятых на текущий момент ученых 
         $('input[name=scienceInput]').each(function (i, item) {
             const science = $(item).attr('data-id');
-            switch (science) {
-              case 'populationDensity':
-                $(item).val(_User.Science.PopulationDensityScientists);
-              break;
-            }
+            $(item).val(_User.Science.getScientists(science));
           });
       }
 
@@ -36,12 +28,7 @@
       function populateScienceProgressBar() {
           $('div[name=scienceProgress]').each(function (i, item) {
             const science = $(item).attr('data-id');
-            let value = 0;
-            switch (science) {
-                case 'populationDensity':
-                    value = _User.Science.PopulationDensityProgress;
-                break;
-            }
+            const value = _User.Science.getScienceProgress(science);
             $(item).css('width', value+'%').attr('aria-valuenow', value);  
             $(`span[data-id=${science}]`).text(`${value}%`);  
           });
