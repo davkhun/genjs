@@ -40,7 +40,7 @@ class Science {
     }
 
     // получение количества учёных занятых над проектом
-    getScientists(science) {
+    getBusyScientists(science) {
         switch (science) {
             case _ScienceDict.PopulationDensity:
                 return this.PopulationDensityScientists;
@@ -56,6 +56,17 @@ class Science {
                 return this.ScienceLevelScientists;
         }
     }
+
+    // максимальное количество занятых ученых
+    getAllBusyScientists() {
+        return this.PopulationDensityScientists +
+            this.PopulationGrowthScientists +
+            this.AgricultureScientists +
+            this.MoneySystemScientists +
+            this.ArmyPowerScientists +
+            this.ScienceLevelScientists;
+    }
+
     // получение уровня развития
     getScienceLevel(science) {
         switch (science) {
@@ -76,7 +87,7 @@ class Science {
 
     // рассчет текущего прогресса в зависимости от количества ученых и сложности исследования
     getCurrentScienceProgress(science) {
-        const scientistsAmount = this.getScientists(science);
+        const scientistsAmount = this.getBusyScientists(science);
         switch (science) {
             case _ScienceDict.PopulationDensity:
                 return scientistsAmount * (this.ScienceLevel - this.PopulationDensityDifficulty);
@@ -145,7 +156,8 @@ class Science {
         }
         // если учёных нет, то и прогресс стоит на месте
         // иначе, получаем остаток от прогресса и делим на текущую производительность
-        return this.getScienceProgress(science) == 0 ? -1 : Math.round((100 - overallProgress) / this.getScienceProgress(science));
+
+        return this.getScienceProgress(science) == 0 ? -1 : Math.ceil((100 - overallProgress) / this.getScienceProgress(science));
     }
 
     // установка прогресса по науке
@@ -246,5 +258,29 @@ class Science {
                 break;
         }
         return scientistsNeed > scientistsAvailable ? 0 : scientistsNeed;
+    }
+
+    // назначение ученых
+    setScientists(science, amount) {
+        switch (science) {
+            case _ScienceDict.PopulationDensity:
+                this.PopulationDensityScientists += amount;
+                break;
+            case _ScienceDict.PopulationGrowth:
+                this.PopulationGrowthScientists += amount;
+                break;
+            case _ScienceDict.Agriculture:
+                this.AgricultureScientists += amount;
+                break;
+            case _ScienceDict.MoneySystem:
+                this.MoneySystemScientists += amount;
+                break;
+            case _ScienceDict.ArmyPower:
+                this.ArmyPowerScientists += amount;
+                break;
+            case _ScienceDict.ScienceLevel:
+                this.ScienceLevelScientists += amount;
+                break;
+        }
     }
 }

@@ -5,3 +5,7 @@
   .gjs-info {
     font-size: 14px;
   }
+
+.progress {
+  margin-bottom: 5px !important;
+}

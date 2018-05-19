@@ -15,6 +15,10 @@ class Country {
         this.BuyGrainConstant = this.Science.MoneySystem * 2;
     }
 
+    getFullPopulation() {
+        return this.FreePopulation + this.Scientists.Amount + this.Soldiers.Amount;
+    }
+
     // ---------- Агрономика
     // вычисление максимально возможного количества засеянного зерна
     getMaxGrainForSeeding() {

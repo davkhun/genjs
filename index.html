@@ -257,16 +257,21 @@
           <div class="col-md-3">
             <div class="form-horizontal">
               <div class="form-group">
-                <label class="control-label">Плотность населения: <span name="scienceLabel" data-id="populationDensity"></span></label>
+                <label class="control-label" name="scienceLabel" data-id="populationDensity">Плотность населения: <span></span></label>
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="populationDensity" role="progressbar" aria-valuemin="0" aria-valuemax="100"
                     style="width: 60%;">
                     <span name="scienceProgressText" data-id="populationDensity">0%</span>
                   </div>
                 </div>
+                <small name="scienceEstimatedSmall" data-id="populationDensity"></small>
                 <div class="input-group">
-                  <input name="scienceInput" data-id="populationDensity" type="text" class="form-control input-sm" />
                   <div class="input-group-btn">
+                      <button name="scienceSetDecrease" data-id="populationDensity" type="button" class="btn btn-sm btn-default">-</button>
+                  </div>
+                  <input name="scienceInput" data-id="populationDensity" type="text" class="form-control input-sm" readonly/>
+                  <div class="input-group-btn">
+                    <button name="scienceSetIncrease" data-id="populationDensity" type="button" class="btn btn-sm btn-default">+</button>
                     <button name="scienceSetMax" data-id="populationDensity" type="button" class="btn btn-sm btn-default">MAX</button>
                     <button name="scienceSet1Yr" data-id="populationDensity" type="button" class="btn btn-sm btn-default">1 Yr.</button>
                   </div>
@@ -338,7 +343,7 @@
     function populateHeader() {
       $('#infoYear').text(`Год: ${_Game.Year}`);
       $('#infoMoney').text(`Деньги: ${_User.Money}`);
-      $('#infoPopulation').text(`Население: ${_User.Population}`);
+      $('#infoPopulation').text(`Население: ${_User.getFullPopulation()}`);
       $('#infoCurrentPopulation').text(`Рабочие: ${_User.FreePopulation}`);
       $('#infoScientists').text(`Ученые: ${_User.Scientists.Amount}`);
       $('#infoSoldiers').text(`Солдаты: ${_User.Soldiers.Amount}`);
@@ -362,6 +367,9 @@
     }
 
     $(document).ready(function () {
+      // test vars
+      _User.Money = 100000;
+      _User.Scientists.Amount = 110;
       console.log(_User);
       console.log(_Game);
       init();
