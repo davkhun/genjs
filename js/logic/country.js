@@ -163,5 +163,15 @@ class Country {
         return Math.round(baseGrowth);
     }
 
-
+    // обработка хода
+    nextYear() {
+        // выдаём зарплаты
+        this.Money -= this.getHiredScientistCosts();
+        this.Money -= this.getHiredSoldierCosts();
+        // приростаем населением
+        this.Population += this.getPopulationGrowth();
+        // выращиваем зерно
+        this.Grain += this.getSownGrain();
+        this.SownGrain = 0;
+    }
 }

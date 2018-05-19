@@ -31,8 +31,6 @@
           const value = slider.slider('getValue');
           // сажаем зерно
           _User.sownGrain(value);
-          // setSliderMaxValue(slider, value);
-          // setSliderMax($('#grainSellInput'), _User.Grain);
           populateAgronomicSlider();
           populateHeader();
         });
@@ -49,7 +47,6 @@
           const value = slider.slider('getValue');
           // продаем зерно
           _User.sellGrain(value);
-          //  setSliderMax($('#grainSellInput'), _User.Grain);
           populateAgronomicSlider();
           populateHeader();
         });
@@ -67,7 +64,6 @@
           const value = slider.slider('getValue');
           // покупаем зерно
           _User.buyGrain(value);
-          // setSliderMax($('#grainBuyInput'), _User.getMaxGrainForBuying());
           populateAgronomicSlider();
           populateHeader();
         });
@@ -84,5 +80,4 @@
           // обновляем 
           populateAgronomicSlider();
           populateHeader();
-          console.log(_User);
       });
