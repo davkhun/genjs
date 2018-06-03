@@ -1,5 +1,6 @@
 class Country {
     constructor() {
+        this.Name = "Руанда"; // по этому элементу будем искать конкретный город в массиве
         this.MaxPopulation = 1000;
         this.Area = 10;
         this.Grain = 50;
@@ -9,6 +10,8 @@ class Country {
         this.Population = 500;
         this.Scientists = new Scientists();
         this.Soldiers = new Soldiers();
+        this.Armies = []; // массив для объектов армий
+        this.Generals = []; // массив для объектов генералов
         this.FreePopulation = this.Population - this.Scientists.Amount - this.Soldiers.Amount;
         this.Science = new Science();
         // константа на покупку зерна
