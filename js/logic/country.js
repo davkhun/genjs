@@ -177,5 +177,7 @@ class Country {
         // выращиваем зерно
         this.Grain += this.getSownGrain();
         this.SownGrain = 0;
+        // тащим науку
+        this.Science.massSetProgress();
     }
 }

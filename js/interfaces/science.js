@@ -1,12 +1,11 @@
+var _timeoutId;
 // настройка контроллов для модального окна науки
 function populateScienceModal() {
     populateScienceLabels();
     populateScienceInput();
     populateScienceProgressBar();
     populateEstimatedYears();
-    populateMaxScientistsBtn();
-    populateIncreaseScientists();
-    populateDecreaseScientists();
+
     $('#scienceModal').modal('show');
 }
 
@@ -72,30 +71,48 @@ function populateMaxScientistsBtn() {
     });
 }
 
+// настройка кнопок снятия всех ученых
+function populateZeroScientistsBtn() {
+    $('button[name=scienceSetZero]').on('click', function () {
+        const science = $(this).attr('data-id');
+        const needToFreeScientists = _User.Science.getBusyScientists(science) * (-1);
+        setScientist(science, needToFreeScientists);
+    });
+}
+
 // настройка добавления ученых в проект
 function populateIncreaseScientists() {
     $('button[name=scienceSetIncrease]').on('mousedown', function () {
         const science = $(this).attr('data-id');
         setScientist(science, 1);
-        timeoutId = setInterval(function () {
+        _timeoutId = setInterval(function () {
             setScientist(science, 1);
         }, 20);
     }).bind('mouseup mouseleave', function () {
-        clearInterval(timeoutId);
+        clearInterval(_timeoutId);
     });
+
 }
 
 function populateDecreaseScientists() {
     $('button[name=scienceSetDecrease]').on('mousedown', function () {
         const science = $(this).attr('data-id');
         setScientist(science, -1);
-        timeoutId = setInterval(function () {
+        _timeoutId = setInterval(function () {
             setScientist(science, -1);
         }, 20);
     }).bind('mouseup mouseleave', function () {
-        clearInterval(timeoutId);
+        clearInterval(_timeoutId);
     });
 }
 
 // настройка кнопок учёных на один год
-
+function populateScientistsForOneYear() {
+    $('button[name=scienceSet1Yr]').on('click', function () {
+        const science = $(this).attr('data-id');
+        const freeScientists = _User.Scientists.Amount - _User.Science.getAllBusyScientists();
+        const scientistsNeed = _User.Science.getScientistsForOneYear(science, freeScientists);
+        if (scientistsNeed > 0)
+            setScientist(science, scientistsNeed);
+    });
+}

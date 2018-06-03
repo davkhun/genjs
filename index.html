@@ -253,21 +253,23 @@
           <h4 class="modal-title">Наука</h4>
         </div>
         <div class="modal-body clearfix">
-
           <div class="col-md-3">
             <div class="form-horizontal">
               <div class="form-group">
-                <label class="control-label" name="scienceLabel" data-id="populationDensity">Плотность населения: <span></span></label>
+                <label class="control-label" name="scienceLabel" data-id="populationDensity">Плотность населения:
+                  <span></span>
+                </label>
                 <div class="progress">
-                  <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="populationDensity" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                    style="width: 60%;">
+                  <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="populationDensity" role="progressbar"
+                    aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
                     <span name="scienceProgressText" data-id="populationDensity">0%</span>
                   </div>
                 </div>
                 <small name="scienceEstimatedSmall" data-id="populationDensity"></small>
                 <div class="input-group">
                   <div class="input-group-btn">
-                      <button name="scienceSetDecrease" data-id="populationDensity" type="button" class="btn btn-sm btn-default">-</button>
+                    <button name="scienceSetZero" data-id="populationDensity" type="button" class="btn btn-sm btn-default">0</button>
+                    <button name="scienceSetDecrease" data-id="populationDensity" type="button" class="btn btn-sm btn-default">-</button>
                   </div>
                   <input name="scienceInput" data-id="populationDensity" type="text" class="form-control input-sm" readonly/>
                   <div class="input-group-btn">
@@ -279,12 +281,146 @@
 
               </div>
             </div>
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label" name="scienceLabel" data-id="populationGrowth">Прирост населения:
+                    <span></span>
+                  </label>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="populationGrowth" role="progressbar"
+                      aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                      <span name="scienceProgressText" data-id="populationGrowth">0%</span>
+                    </div>
+                  </div>
+                  <small name="scienceEstimatedSmall" data-id="populationGrowth"></small>
+                  <div class="input-group">
+                    <div class="input-group-btn">
+                      <button name="scienceSetZero" data-id="populationGrowth" type="button" class="btn btn-sm btn-default">0</button>
+                      <button name="scienceSetDecrease" data-id="populationGrowth" type="button" class="btn btn-sm btn-default">-</button>
+                    </div>
+                    <input name="scienceInput" data-id="populationGrowth" type="text" class="form-control input-sm" readonly/>
+                    <div class="input-group-btn">
+                      <button name="scienceSetIncrease" data-id="populationGrowth" type="button" class="btn btn-sm btn-default">+</button>
+                      <button name="scienceSetMax" data-id="populationGrowth" type="button" class="btn btn-sm btn-default">MAX</button>
+                      <button name="scienceSet1Yr" data-id="populationGrowth" type="button" class="btn btn-sm btn-default">1 Yr.</button>
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
           </div>
           <div class="col-md-offset-1 col-md-3">
-
+              <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label" name="scienceLabel" data-id="agriculture">Сельское хозяйство:
+                      <span></span>
+                    </label>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="agriculture" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                        <span name="scienceProgressText" data-id="agriculture">0%</span>
+                      </div>
+                    </div>
+                    <small name="scienceEstimatedSmall" data-id="agriculture"></small>
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <button name="scienceSetZero" data-id="agriculture" type="button" class="btn btn-sm btn-default">0</button>
+                        <button name="scienceSetDecrease" data-id="agriculture" type="button" class="btn btn-sm btn-default">-</button>
+                      </div>
+                      <input name="scienceInput" data-id="agriculture" type="text" class="form-control input-sm" readonly/>
+                      <div class="input-group-btn">
+                        <button name="scienceSetIncrease" data-id="agriculture" type="button" class="btn btn-sm btn-default">+</button>
+                        <button name="scienceSetMax" data-id="agriculture" type="button" class="btn btn-sm btn-default">MAX</button>
+                        <button name="scienceSet1Yr" data-id="agriculture" type="button" class="btn btn-sm btn-default">1 Yr.</button>
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                      <label class="control-label" name="scienceLabel" data-id="moneySystem">Денежная система:
+                        <span></span>
+                      </label>
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="moneySystem" role="progressbar"
+                          aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                          <span name="scienceProgressText" data-id="moneySystem">0%</span>
+                        </div>
+                      </div>
+                      <small name="scienceEstimatedSmall" data-id="moneySystem"></small>
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                          <button name="scienceSetZero" data-id="moneySystem" type="button" class="btn btn-sm btn-default">0</button>
+                          <button name="scienceSetDecrease" data-id="moneySystem" type="button" class="btn btn-sm btn-default">-</button>
+                        </div>
+                        <input name="scienceInput" data-id="moneySystem" type="text" class="form-control input-sm" readonly/>
+                        <div class="input-group-btn">
+                          <button name="scienceSetIncrease" data-id="moneySystem" type="button" class="btn btn-sm btn-default">+</button>
+                          <button name="scienceSetMax" data-id="moneySystem" type="button" class="btn btn-sm btn-default">MAX</button>
+                          <button name="scienceSet1Yr" data-id="moneySystem" type="button" class="btn btn-sm btn-default">1 Yr.</button>
+                        </div>
+                      </div>
+      
+                    </div>
+                  </div>
           </div>
           <div class="col-md-offset-1 col-md-3">
-
+              <div class="form-horizontal">
+                  <div class="form-group">
+                    <label class="control-label" name="scienceLabel" data-id="armyPower">Сила армии:
+                      <span></span>
+                    </label>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="armyPower" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                        <span name="scienceProgressText" data-id="armyPower">0%</span>
+                      </div>
+                    </div>
+                    <small name="scienceEstimatedSmall" data-id="armyPower"></small>
+                    <div class="input-group">
+                      <div class="input-group-btn">
+                        <button name="scienceSetZero" data-id="armyPower" type="button" class="btn btn-sm btn-default">0</button>
+                        <button name="scienceSetDecrease" data-id="armyPower" type="button" class="btn btn-sm btn-default">-</button>
+                      </div>
+                      <input name="scienceInput" data-id="armyPower" type="text" class="form-control input-sm" readonly/>
+                      <div class="input-group-btn">
+                        <button name="scienceSetIncrease" data-id="armyPower" type="button" class="btn btn-sm btn-default">+</button>
+                        <button name="scienceSetMax" data-id="armyPower" type="button" class="btn btn-sm btn-default">MAX</button>
+                        <button name="scienceSet1Yr" data-id="armyPower" type="button" class="btn btn-sm btn-default">1 Yr.</button>
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                      <label class="control-label" name="scienceLabel" data-id="scienceLevel">Научный уровень:
+                        <span></span>
+                      </label>
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" name="scienceProgress" data-id="scienceLevel" role="progressbar"
+                          aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                          <span name="scienceProgressText" data-id="scienceLevel">0%</span>
+                        </div>
+                      </div>
+                      <small name="scienceEstimatedSmall" data-id="scienceLevel"></small>
+                      <div class="input-group">
+                        <div class="input-group-btn">
+                          <button name="scienceSetZero" data-id="scienceLevel" type="button" class="btn btn-sm btn-default">0</button>
+                          <button name="scienceSetDecrease" data-id="scienceLevel" type="button" class="btn btn-sm btn-default">-</button>
+                        </div>
+                        <input name="scienceInput" data-id="scienceLevel" type="text" class="form-control input-sm" readonly/>
+                        <div class="input-group-btn">
+                          <button name="scienceSetIncrease" data-id="scienceLevel" type="button" class="btn btn-sm btn-default">+</button>
+                          <button name="scienceSetMax" data-id="scienceLevel" type="button" class="btn btn-sm btn-default">MAX</button>
+                          <button name="scienceSet1Yr" data-id="scienceLevel" type="button" class="btn btn-sm btn-default">1 Yr.</button>
+                        </div>
+                      </div>
+      
+                    </div>
+                  </div>
           </div>
 
         </div>
@@ -338,6 +474,13 @@
       populateSoldiersDismiss();
       // отображение научного уровня
       populateScienceInfo();
+
+      // настройка кнопок для раздела с наукой
+      populateMaxScientistsBtn();
+      populateIncreaseScientists();
+      populateDecreaseScientists();
+      populateScientistsForOneYear();
+      populateZeroScientistsBtn();
     }
 
     function populateHeader() {
