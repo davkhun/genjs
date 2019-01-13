@@ -239,22 +239,22 @@ class Science {
         //вычисляем оставшийся прогресс и делим на учёный уровень, округляя
         switch (science) {
             case _ScienceDict.PopulationDensity:
-                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel - this.PopulationDensityDifficulty));
+                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel) * this.PopulationDensityDifficulty);
                 break;
             case _ScienceDict.PopulationGrowth:
-                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel - this.PopulationGrowthDifficulty));
+                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel) * this.PopulationGrowthDifficulty);
                 break;
             case _ScienceDict.Agriculture:
-                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel - this.AgricultureDifficulty));
+                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel) * this.AgricultureDifficulty);
                 break;
             case _ScienceDict.MoneySystem:
-                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel - this.MoneySystemDifficulty));
+                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel) * this.MoneySystemDifficulty);
                 break;
             case _ScienceDict.ArmyPower:
-                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel - this.MoneySystemDifficulty));
+                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel) * this.MoneySystemDifficulty);
                 break;
             case _ScienceDict.ScienceLevel:
-                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel - this.ScienceLevelDifficulty));
+                scientistsNeed = Math.ceil(remainingProgress / (this.ScienceLevel) * this.ScienceLevelDifficulty);
                 break;
         }
         console.log(scientistsNeed);
