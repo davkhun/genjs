@@ -522,12 +522,12 @@
     }
 
     function populateScienceInfo() {
-      $('#infoPopulationDensityLevel').text(`Плотность населения: ${_User.Science.PopulationDensity}`);
-      $('#infoPopulationGrowthLevel').text(`Прирост населения: ${_User.Science.PopulationGrowth}`);
-      $('#infoAgricultureLevel').text(`Сельское хозяйство: ${_User.Science.Agriculture}`);
-      $('#infoMoneySystemLevel').text(`Денежная система: ${_User.Science.MoneySystem}`);
-      $('#infoArmyPowerLevel').text(`Сила армии: ${_User.Science.ArmyPower}`);
-      $('#infoScienceLevel').text(`Научный уровень: ${_User.Science.ScienceLevel}`);
+      $('#infoPopulationDensityLevel').text(`Плотность населения: ${Math.round(_User.Science.PopulationDensity*100)/100}`);
+      $('#infoPopulationGrowthLevel').text(`Прирост населения: ${Math.round(_User.Science.PopulationGrowth*100)/100}`);
+      $('#infoAgricultureLevel').text(`Сельское хозяйство: ${Math.round(_User.Science.Agriculture*100)/100}`);
+      $('#infoMoneySystemLevel').text(`Денежная система: ${Math.round(_User.Science.MoneySystem*100)/100}`);
+      $('#infoArmyPowerLevel').text(`Сила армии: ${Math.round(_User.Science.ArmyPower*100)/100}`);
+      $('#infoScienceLevel').text(`Научный уровень: ${Math.round(_User.Science.ScienceLevel*100)/100}`);
     }
 
     $(document).ready(function () {
